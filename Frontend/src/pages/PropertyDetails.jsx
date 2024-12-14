@@ -14,27 +14,44 @@ const PropertyDetails = () => {
     );
   }
 
-  console.log('Image Path:', property.image); // Debugging
-
   return (
-    <div className="container px-4 py-8 mx-auto">
-      <h1 className="text-3xl font-bold text-[#0a3d62] mb-6">{property.title}</h1>
-      <div className="flex flex-col md:flex-row">
-        <img
-          src={property.image}
-          alt={property.title}
-          onError={(e) => (e.target.src = './images/property.png')} // Fallback image
-          className="object-cover w-full h-48 md:w-1/2"
-        />
-        <div className="md:w-1/2">
-          <p className="text-xl text-gray-600">{property.description}</p>
-          <p className="text-lg font-semibold text-[#0a3d62] mt-4">{`Price: ${property.price}`}</p>
-          <p className="mt-2 text-gray-600">
-            <strong>Location:</strong> {property.location}
+    <div className="container max-w-4xl px-4 py-8 mx-auto">
+      <div className="overflow-hidden bg-white rounded-md shadow-md">
+        {/* Property Title and Description */}
+        <div className="p-4 border-b">
+          <h1 className="text-2xl font-semibold text-[#0a3d62] mb-2">
+            {property.title}
+          </h1>
+          <p className="text-sm text-gray-600">{property.description}</p>
+        </div>
+
+        {/* Property Details */}
+        <div className="grid grid-cols-2 gap-4 p-4 text-sm md:text-base">
+          <p>
+            <strong className="font-semibold">Price:</strong> {property.price}
           </p>
+          <p>
+            <strong className="font-semibold">Location:</strong> {property.location}
+          </p>
+          <p>
+            <strong className="font-semibold">Bedrooms:</strong> {property.bedrooms || '2/3'}
+          </p>
+          <p>
+            <strong className="font-semibold">Bathrooms:</strong> {property.bathrooms || '3/4'}
+          </p>
+          <p>
+            <strong className="font-semibold">Type:</strong> {property.type || 'N/A'}
+          </p>
+          <p>
+            <strong className="font-semibold">Size:</strong> {property.size || 'N/A'} sq. ft.
+          </p>
+        </div>
+
+        {/* Call to Action */}
+        <div className="p-4 text-center">
           <button
-            className="mt-6 bg-[#27ae60] text-white py-2 px-4 rounded-full hover:bg-[#1a854d] transition-all"
-            onClick={() => alert('Booking successfully!')}
+            className="bg-[#27ae60] text-white text-sm py-2 px-4 rounded hover:bg-[#1a854d] transition-all"
+            onClick={() => alert('Booking successfully! and Agent will connect with you soon!')}
           >
             Book Now
           </button>

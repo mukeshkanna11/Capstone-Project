@@ -86,6 +86,91 @@ const properties = [
     rating: 4.3,
     tags: ['Rural', 'Spacious'],
   },
+  {
+    id: 7,
+    title: 'Penthouse with City Skyline View',
+    price: '$2,500,000',
+    location: '500 Skyview Ave, New York, NY',
+    description: 'A luxurious penthouse offering panoramic views of the city skyline.',
+    image: './src/images/property7.png',
+    bedrooms: 4,
+    bathrooms: 4,
+    size: '3,500 sq ft',
+    amenities: ['Private Elevator', 'Sky Garden', 'Concierge Service'],
+    rating: 4.9,
+    tags: ['Luxury', 'Skyline View'],
+  },
+  {
+    id: 8,
+    title: 'Suburban Family Home with Pool',
+    price: '$750,000',
+    location: '120 Oakwood Dr, Austin, TX',
+    description: 'A spacious family home in a suburban area with a large backyard and pool.',
+    image: './src/images/property8.png',
+    bedrooms: 4,
+    bathrooms: 3,
+    size: '2,800 sq ft',
+    amenities: ['Private Pool', 'Large Yard', 'Garage'],
+    rating: 4.4,
+    tags: ['Family Home', 'Suburban'],
+  },
+  {
+    id: 9,
+    title: 'Historical Mansion with Estate Grounds',
+    price: '$5,000,000',
+    location: '999 Heritage Blvd, Charleston, SC',
+    description: 'A grand historical mansion set on expansive estate grounds, perfect for hosting events.',
+    image: './src/images/property9.png',
+    bedrooms: 6,
+    bathrooms: 5,
+    size: '7,000 sq ft',
+    amenities: ['Grand Ballroom', 'Wine Cellar', 'Tennis Court'],
+    rating: 4.8,
+    tags: ['Historical', 'Luxury'],
+  },
+  {
+    id: 10,
+    title: 'Lakefront Cabin Retreat',
+    price: '$400,000',
+    location: '45 Lakeview Rd, Lake Tahoe, CA',
+    description: 'A cozy cabin on the lakefront with serene views and a private dock.',
+    image: './src/images/property10.png',
+    bedrooms: 2,
+    bathrooms: 1,
+    size: '1,000 sq ft',
+    amenities: ['Private Dock', 'Fire Pit', 'Outdoor Activities'],
+    rating: 4.1,
+    tags: ['Lakefront', 'Retreat'],
+  },
+  {
+    id: 11,
+    title: 'Urban Apartment with Rooftop Terrace',
+    price: '$950,000',
+    location: '225 Downtown St, Chicago, IL',
+    description: 'An urban apartment with modern features and access to a private rooftop terrace.',
+    image: './src/images/property11.png',
+    bedrooms: 3,
+    bathrooms: 2,
+    size: '1,600 sq ft',
+    amenities: ['Rooftop Terrace', 'Gym', '24/7 Security'],
+    rating: 4.6,
+    tags: ['Urban', 'Luxury'],
+  },
+  {
+    id: 12,
+    title: 'Mountain Lodge with Ski-in/Ski-out Access',
+    price: '$1,800,000',
+    location: '99 Summit Rd, Aspen, CO',
+    description: 'A stunning mountain lodge with ski-in/ski-out access, ideal for winter sports enthusiasts.',
+    image: './src/images/property12.png',
+    bedrooms: 5,
+    bathrooms: 4,
+    size: '4,000 sq ft',
+    amenities: ['Ski-in/Ski-out', 'Hot Tub', 'Game Room'],
+    rating: 4.7,
+    tags: ['Mountain Retreat', 'Luxury'],
+  },
+
   // More properties here...
 ];
 
@@ -111,7 +196,7 @@ const Home = () => {
     Discover your dream home or the perfect investment property. With our curated listings,
     you can find luxurious apartments, cozy cottages, spacious villas, and more.
   </p>
-  <p className="max-w-3xl mx-auto mb-8 text-lg text-gray-600 md:text-xl animate__animated animate__fadeIn animate__delay-2s">
+  <p className="max-w-3xl mx-auto mb-8 text-lg text-[#0a3d62] md:text-xl animate__animated animate__fadeIn animate__delay-2s">
     Our platform is designed to help you explore the best real estate projects that fit your
     lifestyle and budget. Whether you're looking for urban sophistication, countryside charm,
     or oceanfront tranquility, we have something for everyone.
@@ -364,8 +449,21 @@ const Home = () => {
   </div>
 </section>
 
+<footer className="py-6 text-black ">
+  <div className="container flex flex-wrap items-center justify-between mx-auto">
+    <p className="text-sm">
+      © {new Date().getFullYear()} Dream Properties. All rights reserved.
+    </p>
+    <div className="flex space-x-4">
+      <a href="#" className="hover:text-[#0a3d62]">Privacy Policy</a>
+      <a href="#" className="hover:text-[#0a3d62]">Terms of Use</a>
+      <a href="#" className="hover:text-[#0a3d62]">Contact Us</a>
+    </div>
+  </div>
+</footer>
 
 </div>
+
   );
 };
 

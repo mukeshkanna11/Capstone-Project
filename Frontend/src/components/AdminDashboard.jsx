@@ -50,17 +50,17 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
           <div className="p-6 text-center bg-white rounded-lg shadow-md">
             <h4 className="mb-2 text-xl font-semibold">Total Properties</h4>
-            <p className="text-3xl font-bold text-blue-600">235</p>
+            <p className="text-3xl font-bold text-blue-600">20</p>
             <p className="text-gray-600">Properties listed in the system</p>
           </div>
           <div className="p-6 text-center bg-white rounded-lg shadow-md">
             <h4 className="mb-2 text-xl font-semibold">Active Agents</h4>
-            <p className="text-3xl font-bold text-green-600">45</p>
+            <p className="text-3xl font-bold text-green-600">10</p>
             <p className="text-gray-600">Agents currently active on the platform</p>
           </div>
           <div className="p-6 text-center bg-white rounded-lg shadow-md">
             <h4 className="mb-2 text-xl font-semibold">User Activity</h4>
-            <p className="text-3xl font-bold text-orange-600">127</p>
+            <p className="text-3xl font-bold text-orange-600">86</p>
             <p className="text-gray-600">Recent activities in the last week</p>
           </div>
         </div>

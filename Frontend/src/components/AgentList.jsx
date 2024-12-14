@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const AgentList = () => {
   const [agents, setAgents] = useState([
-    { id: 1, name: "John Doe", email: "john.doe@email.com", phone: "123-456-7890" },
-    { id: 2, name: "Jane Smith", email: "jane.smith@email.com", phone: "987-654-3210" },
+    { id: 1, name: "Kavi K", email: "kavi@email.com", phone: "6382757904" },
+    { id: 2, name: "Stalin S", email: "stalls@email.com", phone: "8110052870" },
   ]);
 
   const handleDelete = (id) => {
