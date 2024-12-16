@@ -5,7 +5,7 @@ const agents = [
     bio: 'Experienced real estate agent with 10+ years in the business. Specializing in residential properties.',
     contact: 'john.doe@example.com',
     phone: '+1 (555) 123-4567',
-    image: 'src/images/agent1.png',
+    image: 'src/images/agent1.jpg',
     experience: 10, // Years of experience
     specialties: ['Residential Properties', 'First-Time Buyers'], // Specialization
     languages: ['English', 'Tamil'], // Languages spoken
