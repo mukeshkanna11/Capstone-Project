@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import images from '../data/properties';
 
-
+import property1 from './images/property1.jpg';
 
 const properties = [
   {
@@ -12,7 +12,7 @@ const properties = [
     description: 'A beautiful luxury apartment with a city view.',
     size: 2500,
     rooms: 3,
-    image: './images/property1.jpg',
+    
     propertyType: 'Apartment',
     buildingStatus: 'Ready to Move In',
     floorLevel: '5th Floor',
