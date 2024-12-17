@@ -204,7 +204,7 @@ const Home = () => {
   </p>
   <div className="relative w-full max-w-3xl mx-auto animate__animated animate__fadeIn animate__delay-2.5s">
     <img
-      src="./src/images/banner.jpg"
+      src="./src/images/banner.JPG"
       alt="Real Estate Banner"     
       className="w-full h-auto transition-all duration-500 transform rounded-lg shadow-2xl hover:scale-110 hover:opacity-80"
     />
