@@ -9,7 +9,7 @@ const properties = [
     description: 'A beautiful luxury apartment with a city view.',
     size: 2500,
     rooms: 3,
-    image: '../images/property1.jpg',
+    image: '/src/images/property1.jpg',
     propertyType: 'Apartment',
     buildingStatus: 'Ready to Move In',
     floorLevel: '5th Floor',
