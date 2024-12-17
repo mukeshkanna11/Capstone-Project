@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       console.log('Sending login data:', { email, password });
-      const response = await axios.post('http://localhost:5000/api/users/login', {
+      const response = await axios.post('https://capstone-project-o9dz.onrender.com/api/users/login', {
         email,
         password,
       });

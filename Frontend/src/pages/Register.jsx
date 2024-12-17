@@ -24,7 +24,7 @@ const Register = () => {
     try {
       console.log('Sending registration data:', { username, email, password });
 
-      const response = await axios.post('http://localhost:5000/api/users/register', {
+      const response = await axios.post('https://capstone-project-o9dz.onrender.com/api/users/register', {
         username,
         email,
         password,
