@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import images from '../data/properties';
 const properties = [
   {
     id: 1,
