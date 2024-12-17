@@ -11,9 +11,16 @@ router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    // Input validation
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
     // Check if user already exists
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'User already exists' });
+    if (userExists) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,8 +35,8 @@ router.post('/register', async (req, res) => {
     await user.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error during registration' });
+    console.error('Registration error:', error.message);
+    res.status(500).json({ message: 'Server error during registration', error: error.message });
   }
 });
 
@@ -63,6 +70,11 @@ router.post('/login', async (req, res) => {
 
     console.log('Step 3: Password validated successfully for email:', email);
 
+    // Ensure JWT_SECRET is defined
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET is undefined. Please set it in your environment variables.');
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       { userId: user._id },
@@ -73,19 +85,17 @@ router.post('/login', async (req, res) => {
     console.log('Step 4: JWT token generated for user:', user.email);
 
     // Send success response
-    return res.status(200).json({ 
-      message: 'Login successful', 
-      token 
+    return res.status(200).json({
+      message: 'Login successful',
+      token,
     });
   } catch (error) {
     console.error('Login error:', error.message);
-    return res.status(500).json({ 
-      message: 'Server error during login', 
-      error: error.message // Provide detailed error for development
+    return res.status(500).json({
+      message: 'Server error during login',
+      error: error.message,
     });
   }
 });
-
-
 
 module.exports = router;

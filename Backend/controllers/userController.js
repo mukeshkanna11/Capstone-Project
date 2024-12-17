@@ -23,23 +23,40 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    // Check if email and password are provided
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Compare the provided password with the stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
     // Check if JWT_SECRET is defined
-    if (!process.env.JWT_SECRET) {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
       throw new Error('JWT_SECRET is undefined. Please set it in your environment variables.');
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // Generate a JWT token
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
 
-    res.status(200).json({ token });
+    // Respond with the token
+    return res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: 'Server error during login' });
+    console.error('Login error:', error.message);
+    res.status(500).json({ 
+      message: 'Server error during login', 
+      error: error.message 
+    });
   }
 };
 
