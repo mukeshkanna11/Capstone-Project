@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import images from '../data/properties';
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 173f468591ed7ea360a47f862f7993ba995bf598
 const properties = [
   {
     id: 1,
@@ -9,7 +15,7 @@ const properties = [
     description: 'A beautiful luxury apartment with a city view.',
     size: 2500,
     rooms: 3,
-    image: 'src/images/property1.jpg',
+    image: './images/property1.JPG',
     propertyType: 'Apartment',
     buildingStatus: 'Ready to Move In',
     floorLevel: '5th Floor',
