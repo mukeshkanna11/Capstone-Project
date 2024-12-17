@@ -1,5 +1,31 @@
 import { useState } from 'react';
 import images from '../data/properties';
+
+const images = [
+  'src/images/property1.jpg',
+  'src/images/property2.jpg',
+  'src/images/property3.jpg',
+  'src/images/property4.jpg',
+  'src/images/property5.jpg',
+  'src/images/property6.jpg',
+  'src/images/property7.jpg',
+  'src/images/property8.jpg',
+  'src/images/property9.jpg',
+  'src/images/property10.jpg',
+  'src/images/property11.jpg',
+  'src/images/property12.jpg',
+  'src/images/property13.jpg',
+  'src/images/property14.jpg',
+  'src/images/property15.jpg',
+  'src/images/property16.jpg',
+  'src/images/property17.jpg',
+  'src/images/property18.jpg',
+  'src/images/property19.jpg',
+  'src/images/property20.jpg',
+]
+
+
+
 const properties = [
   {
     id: 1,
