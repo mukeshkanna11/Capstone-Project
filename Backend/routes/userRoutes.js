@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User'); // Ensure the correct path
+require('dotenv').config(); // Load environment variables from .env file
+
 const router = express.Router();
 
 // Register Route
@@ -36,31 +38,54 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the email exists
+    // Input validation
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+
+    console.log('Step 1: Received login request for email:', email);
+
+    // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      console.log('User not found');
-      return res.status(400).json({ message: 'User not found' });
+      console.log('Step 2: User not found for email:', email);
+      return res.status(401).json({ message: 'Invalid credentials. Please check your email or password.' });
     }
 
-    // Compare the password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      console.log('Invalid credentials');
-      return res.status(400).json({ message: 'Invalid credentials' });
+    console.log('Step 2: User found:', user.email);
+
+    // Validate password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      console.log('Step 3: Password validation failed for email:', email);
+      return res.status(401).json({ message: 'Invalid credentials. Please check your email or password.' });
     }
 
-    // Create JWT token if credentials are valid
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h', // Token expires in 1 hour
+    console.log('Step 3: Password validated successfully for email:', email);
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    console.log('Step 4: JWT token generated for user:', user.email);
+
+    // Send success response
+    return res.status(200).json({ 
+      message: 'Login successful', 
+      token 
     });
-
-    console.log('Login successful');
-    res.status(200).json({ token }); // Send token as response
   } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ message: 'Server error during login' });
+    console.error('Login error:', error.message);
+    return res.status(500).json({ 
+      message: 'Server error during login', 
+      error: error.message // Provide detailed error for development
+    });
   }
 });
+
+
 
 module.exports = router;

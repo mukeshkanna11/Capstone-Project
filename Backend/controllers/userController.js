@@ -29,9 +29,17 @@ exports.loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
+    // Check if JWT_SECRET is defined
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET is undefined. Please set it in your environment variables.');
+    }
+
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error during login' });
   }
 };
+
