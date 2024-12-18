@@ -2,6 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../data/properties';
 import property1 from '../images/property1.jpg';
+import property2 from '../images/property2.jpg';
+import property3 from '../images/property3.jpg';
+import property4 from '../images/property4.jpg';
+import property5 from '../images/property5.jpg';
+import property6 from '../images/property6.jpg';
+import property7 from '../images/property7.jpg';
+import property8 from '../images/property8.jpg';
+import property9 from '../images/property9.jpg';
+import property10 from '../images/property10.jpg';
+import property11 from '../images/property11.jpg';
+import property12 from '../images/property12.jpg';
+import banner from '../images/banner.jpg';
+
+
+
 const properties = [
   {
     id: 1,
@@ -23,7 +38,7 @@ const properties = [
     price: '$850,000',
     location: '456 Park Ave, Beverly Hills, CA',
     description: 'A spacious villa with a beautiful garden and pool.',
-    image: '/src/images/property2.jpg',
+    image: property2,
     bedrooms: 4,
     bathrooms: 3,
     size: '3,000 sq ft',
@@ -37,7 +52,7 @@ const properties = [
     price: '$950,000',
     location: '789 Beach Blvd, Malibu, CA',
     description: 'A modern condo with a breathtaking ocean view.',
-    image: '/src/images/property3.jpg',
+    image: property3,
     bedrooms: 2,
     bathrooms: 2,
     size: '1,200 sq ft',
@@ -51,7 +66,7 @@ const properties = [
     price: '$450,000',
     location: '101 Forest Rd, Asheville, NC',
     description: 'A cozy cottage surrounded by nature, perfect for relaxation.',
-    image: '/src/images/property4.jpg',
+    image: property4,
     bedrooms: 2,
     bathrooms: 1,
     size: '900 sq ft',
@@ -65,7 +80,7 @@ const properties = [
     price: '$1,000,000',
     location: '202 City Square, San Francisco, CA',
     description: 'A contemporary loft with an open floor plan in the heart of the city.',
-    image: '/src/images/property5.jpg',
+    image: property5,
     bedrooms: 3,
     bathrooms: 2,
     size: '1,800 sq ft',
@@ -79,7 +94,7 @@ const properties = [
     price: '$600,000',
     location: '303 Country Rd, Dallas, TX',
     description: 'A charming farmhouse with large acreage, ideal for farming.',
-    image: '/src/images/property6.jpg',
+    image: property6,
     bedrooms: 4,
     bathrooms: 2,
     size: '2,500 sq ft',
@@ -93,7 +108,7 @@ const properties = [
     price: '$2,500,000',
     location: '500 Skyview Ave, New York, NY',
     description: 'A luxurious penthouse offering panoramic views of the city skyline.',
-    image: '/src/images/property7.jpg',
+    image: property7,
     bedrooms: 4,
     bathrooms: 4,
     size: '3,500 sq ft',
@@ -107,7 +122,7 @@ const properties = [
     price: '$750,000',
     location: '120 Oakwood Dr, Austin, TX',
     description: 'A spacious family home in a suburban area with a large backyard and pool.',
-    image: '/src/images/property8.jpg',
+    image: property8,
     bedrooms: 4,
     bathrooms: 3,
     size: '2,800 sq ft',
@@ -121,7 +136,7 @@ const properties = [
     price: '$5,000,000',
     location: '999 Heritage Blvd, Charleston, SC',
     description: 'A grand historical mansion set on expansive estate grounds, perfect for hosting events.',
-    image: '/src/images/property9.jpg',
+    image: property9,
     bedrooms: 6,
     bathrooms: 5,
     size: '7,000 sq ft',
@@ -135,7 +150,7 @@ const properties = [
     price: '$400,000',
     location: '45 Lakeview Rd, Lake Tahoe, CA',
     description: 'A cozy cabin on the lakefront with serene views and a private dock.',
-    image: '/src/images/property10.jpg',
+    image: property10,
     bedrooms: 2,
     bathrooms: 1,
     size: '1,000 sq ft',
@@ -149,7 +164,7 @@ const properties = [
     price: '$950,000',
     location: '225 Downtown St, Chicago, IL',
     description: 'An urban apartment with modern features and access to a private rooftop terrace.',
-    image: '/src/images/property11.jpg',
+    image: property11,
     bedrooms: 3,
     bathrooms: 2,
     size: '1,600 sq ft',
@@ -163,7 +178,7 @@ const properties = [
     price: '$1,800,000',
     location: '99 Summit Rd, Aspen, CO',
     description: 'A stunning mountain lodge with ski-in/ski-out access, ideal for winter sports enthusiasts.',
-    image: '/src/images/property12.jpg',
+    image: property12,
     bedrooms: 5,
     bathrooms: 4,
     size: '4,000 sq ft',
@@ -204,7 +219,7 @@ const Home = () => {
   </p>
   <div className="relative w-full max-w-3xl mx-auto animate__animated animate__fadeIn animate__delay-2.5s">
     <img
-      src="/src/images/banner.JPG"
+      src={banner}
       alt="Real Estate Banner"     
       className="w-full h-auto transition-all duration-500 transform rounded-lg shadow-2xl hover:scale-110 hover:opacity-80"
     />

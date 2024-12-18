@@ -1,6 +1,28 @@
 import { useState } from 'react';
 import images from '../data/properties';
 
+import property1 from '../images/property1.jpg';
+import property2 from '../images/property2.jpg';
+import property3 from '../images/property3.jpg';
+import property4 from '../images/property4.jpg';
+import property5 from '../images/property5.jpg';
+import property6 from '../images/property6.jpg';
+import property7 from '../images/property7.jpg';
+import property8 from '../images/property8.jpg';
+import property9 from '../images/property9.jpg';
+import property10 from '../images/property10.jpg';
+import property11 from '../images/property11.jpg';
+import property12 from '../images/property12.jpg';
+import property13 from '../images/property13.jpg';
+import property14 from '../images/property14.jpg';
+import property15 from '../images/property15.jpg';
+import property16 from '../images/property16.jpg';
+import property17 from '../images/property17.jpg';
+import property18 from '../images/property18.jpg';
+import property19 from '../images/property19.jpg';
+import property20 from '../images/property20.jpg';
+
+
 const properties = [
   {
     id: 1,
@@ -10,7 +32,7 @@ const properties = [
     description: 'A beautiful luxury apartment with a city view.',
     size: 2500,
     rooms: 3,
-    image: 'src/images/property1.jpg',
+    image: property1,
     propertyType: 'Apartment',
     buildingStatus: 'Ready to Move In',
     floorLevel: '5th Floor',
@@ -35,7 +57,7 @@ const properties = [
     description: 'A spacious villa with a beautiful garden and pool.',
     size: 4000,
     rooms: 4,
-    image: 'src/images/property2.jpg',
+    image: property2,
     propertyType: 'Villa',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -60,7 +82,7 @@ const properties = [
     description: 'A modern condo with a breathtaking ocean view.',
     size: 3000,
     rooms: 3,
-    image: 'src/images/property3.jpg',
+    image: property3,
     propertyType: 'Condo',
     buildingStatus: 'Ready to Move In',
     floorLevel: '3rd Floor',
@@ -85,7 +107,7 @@ const properties = [
     description: 'A cozy cottage surrounded by nature, perfect for relaxation.',
     size: 1500,
     rooms: 2,
-    image: 'src/images/property4.jpg',
+    image: property4,
     propertyType: 'Cottage',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -110,7 +132,7 @@ const properties = [
     description: 'A contemporary loft with an open floor plan in the heart of the city.',
     size: 2000,
     rooms: 2,
-    image: 'src/images/property5.jpg',
+    image: property5,
     propertyType: 'Loft',
     buildingStatus: 'Ready to Move In',
     floorLevel: '4th Floor',
@@ -135,7 +157,7 @@ const properties = [
     description: 'A charming farmhouse with large acreage, ideal for farming.',
     size: 3500,
     rooms: 4,
-    image: 'src/images/property6.jpg',
+    image: property6,
     propertyType: 'Farmhouse',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -160,7 +182,7 @@ const properties = [
     description: 'A luxurious penthouse offering stunning skyline views.',
     size: 5000,
     rooms: 5,
-    image: 'src/images/property7.jpg',
+    image: property7,
     propertyType: 'Penthouse',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'Penthouse',
@@ -185,7 +207,7 @@ const properties = [
     description: 'A rustic log cabin retreat nestled in the mountains.',
     size: 1800,
     rooms: 2,
-    image: 'src/images/property8.jpg',
+    image: property8,
     propertyType: 'Log Cabin',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -210,7 +232,7 @@ const properties = [
     description: 'An elegant townhouse with modern amenities in a quiet suburb.',
     size: 2200,
     rooms: 3,
-    image: 'src/images/property9.jpg',
+    image: property9,
     propertyType: 'Townhouse',
     buildingStatus: 'Ready to Move In',
     floorLevel: '2nd Floor',
@@ -235,7 +257,7 @@ const properties = [
     description: 'A beachfront bungalow with direct access to the beach.',
     size: 2800,
     rooms: 4,
-    image: 'src/images/property10.jpg',
+    image: property10,
     propertyType: 'Bungalow',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -261,7 +283,7 @@ const properties = [
     description: 'A luxury villa overlooking the crystal-clear waters with private dock.',
     size: 5500,
     rooms: 6,
-    image: 'src/images/property11.jpg',
+    image: property11,
     propertyType: 'Villa',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -286,7 +308,7 @@ const properties = [
     description: 'A stunning penthouse with panoramic city views and modern amenities.',
     size: 3200,
     rooms: 4,
-    image: 'src/images/property12.jpg',
+    image: property12,
     propertyType: 'Penthouse',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'Penthouse',
@@ -311,7 +333,7 @@ const properties = [
     description: 'A rustic mountain cabin ideal for vacations or full-time living.',
     size: 2200,
     rooms: 3,
-    image: 'src/images/property13.jpg',
+    image: property13,
     propertyType: 'Cabin',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -336,7 +358,7 @@ const properties = [
     description: 'A luxury villa located right next to a renowned golf course.',
     size: 4000,
     rooms: 5,
-    image: 'src/images/property14.jpg',
+    image: property14,
     propertyType: 'Villa',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -361,7 +383,7 @@ const properties = [
     description: 'A sustainable home built with eco-friendly materials and design.',
     size: 2700,
     rooms: 3,
-    image: 'src/images/property15.jpg',
+    image: property15,
     propertyType: 'House',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -386,7 +408,7 @@ const properties = [
     description: 'An ultra-modern mansion with a private pool, gym, and movie theater.',
     size: 10000,
     rooms: 8,
-    image: 'src/images/property16.jpg',
+    image: property16,
     propertyType: 'Mansion',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -411,7 +433,7 @@ const properties = [
     description: 'A cozy coastal retreat with ocean views, perfect for beach lovers.',
     size: 2200,
     rooms: 3,
-    image: 'src/images/property17.jpg',
+    image: property17,
     propertyType: 'Bungalow',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -436,7 +458,7 @@ const properties = [
     description: 'A grand estate with breathtaking mountain views and private trails.',
     size: 7500,
     rooms: 6,
-    image: 'src/images/property18.jpg',
+    image: property18,
     propertyType: 'Estate',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -461,7 +483,7 @@ const properties = [
     description: 'A beautifully restored historic mansion with modern touches.',
     size: 6000,
     rooms: 7,
-    image: 'src/images/property19.jpg',
+    image: property19,
     propertyType: 'Mansion',
     buildingStatus: 'Ready to Move In',
     floorLevel: 'N/A',
@@ -486,7 +508,7 @@ const properties = [
     description: 'A minimalist urban loft with open space and industrial design.',
     size: 2200,
     rooms: 2,
-    image: 'src/images/property20.jpg',
+    image: property20,
     propertyType: 'Loft',
     buildingStatus: 'Ready to Move In',
     floorLevel: '3rd Floor',
