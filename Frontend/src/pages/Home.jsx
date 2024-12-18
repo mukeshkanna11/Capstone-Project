@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import images from '../data/properties';
-
+import property1 from '../images/property1.jpg';
 const properties = [
   {
     id: 1,
@@ -9,7 +9,7 @@ const properties = [
     price: '$1,200,000',
     location: '123 Main St, Downtown, NY',
     description: 'A beautiful luxury apartment with a city view.',
-    image: '/src/images/property1.jpg',
+    image: property1,
     bedrooms: 3,
     bathrooms: 2,
     size: '1,500 sq ft',
