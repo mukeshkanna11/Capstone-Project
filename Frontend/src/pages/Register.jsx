@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaBuilding, FaHome, FaKey } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -7,23 +8,21 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Reset error message
-    setErrorMessage('');
-
-    // Validate inputs
     if (!username || !email || !password) {
-      alert('All fields are required.');
+      setErrorMessage('All fields are required.');
       return;
     }
 
-    try {
-      console.log('Sending registration data:', { username, email, password });
+    setErrorMessage('');
+    setLoading(true);
 
+    try {
       const response = await axios.post('https://capstone-project-o9dz.onrender.com/api/users/register', {
         username,
         email,
@@ -31,35 +30,45 @@ const Register = () => {
       });
 
       if (response.status === 201) {
-        console.log('Registration successful:', response.data);
         alert('Registration successful! Please log in.');
         navigate('/login');
-      } else {
-        console.log('Unexpected response:', response);
-        setErrorMessage('Unexpected error occurred. Please try again.');
       }
     } catch (error) {
-      console.error('Full error object:', error);
-      if (error.response) {
-        console.error('Error response:', error.response);
-        setErrorMessage(error.response.data.message || 'Registration failed. Please try again.');
-      } else if (error.request) {
-        console.error('Error request:', error.request);
-        setErrorMessage('No response from server. Please check if the backend is running.');
+      if (error.response && error.response.status === 400) {
+        setErrorMessage('User already exists. Please use a different email.');
       } else {
-        console.error('Error:', error.message);
-        setErrorMessage('An error occurred while registering. Please try again later.');
+        setErrorMessage('Something went wrong. Please try again later.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-        <h2 className="mb-6 text-2xl font-bold text-center">Register</h2>
-        {errorMessage && (
-          <div className="mb-4 text-sm text-red-500">{errorMessage}</div>
-        )}
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-700">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-600 rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-48 h-48 bg-blue-400 rounded-full opacity-20 animate-pulse"></div>
+
+      {/* Animated Icons */}
+      <div className="absolute text-blue-300 transition-transform transform top-8 left-8 animate-pulse hover:scale-110">
+        <FaBuilding size={50} className="drop-shadow-md" />
+      </div>
+      <div className="absolute text-blue-300 transition-transform transform top-16 right-12 animate-pulse hover:rotate-12">
+        <FaHome size={40} className="drop-shadow-md" />
+      </div>
+      <div className="absolute text-blue-300 transition-transform transform bottom-16 left-16 animate-spin-fast hover:scale-110">
+        <FaKey size={50} className="drop-shadow-md" />
+      </div>
+
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg bg-opacity-90 backdrop-blur-lg">
+        <h2 className="mb-6 text-3xl font-bold text-center text-gray-900">
+          Welcome to RealEstatePro🏡
+        </h2>
+        <p className="mb-6 text-center text-gray-700">Sign up to explore your dream properties.</p>
+
+        {errorMessage && <p className="mb-4 text-sm text-red-500">{errorMessage}</p>}
+
         <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">
@@ -68,7 +77,7 @@ const Register = () => {
             <input
               type="text"
               id="username"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -83,7 +92,7 @@ const Register = () => {
             <input
               type="email"
               id="email"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -98,7 +107,7 @@ const Register = () => {
             <input
               type="password"
               id="password"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -108,20 +117,19 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full py-3 font-semibold text-white transition duration-200 bg-blue-500 rounded-lg hover:bg-blue-600"
+            disabled={loading}
+            className={`w-full py-3 font-semibold text-white rounded-lg transition duration-200 ${
+              loading ? 'bg-indigo-300 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'
+            }`}
           >
-            Register
+            {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
-
-        <p className="mt-4 text-sm text-center text-gray-600">
+        <p className="mt-6 text-sm text-center text-gray-600">
           Already have an account?{' '}
-          <button
-            className="text-blue-500 hover:underline"
-            onClick={() => navigate('/login')}
-          >
+          <a href="/login" className="text-indigo-600 hover:underline">
             Login here
-          </button>
+          </a>
         </p>
       </div>
     </div>
