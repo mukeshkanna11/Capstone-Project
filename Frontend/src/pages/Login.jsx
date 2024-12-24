@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // To display error messages
+  const [loading, setLoading] = useState(false); // To handle loading state
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
-      alert('Email and Password are required.');
+      setError('Email and Password are required.');
       return;
     }
 
+    setError(''); // Clear any previous errors
+    setLoading(true); // Show loading state
+
     try {
-      console.log('Sending login data:', { email, password });
       const response = await axios.post('https://capstone-project-o9dz.onrender.com/api/users/login', {
         email,
         password,
@@ -24,19 +28,27 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log('Login successful:', response.data);
+
+        // Store user token or data in session storage (if needed)
+        sessionStorage.setItem('authToken', response.data.token);
+
+        // Update login state and navigate to home page
+        onLogin(); // This updates the authentication state in the parent component
         alert('Login successful!');
-        navigate('/');
-      } else {
-        console.log('Unexpected response:', response);
-        alert('Unexpected response from server.');
+        navigate('/'); // Redirect to the home page
       }
     } catch (error) {
-      console.error('Error response:', error.response);
-      if (error.response) {
-        alert(error.response.data.message || 'Login failed.');
+      console.error('Error during login:', error.response);
+
+      if (error.response && error.response.status === 401) {
+        setError('Invalid credentials. Please check your email or password.');
+      } else if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
       } else {
-        alert('Something went wrong. Please try again later.');
+        setError('Something went wrong. Please try again later.');
       }
+    } finally {
+      setLoading(false); // Hide loading state
     }
   };
 
@@ -44,6 +56,9 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
         <h2 className="mb-6 text-2xl font-bold text-center">Login</h2>
+
+        {error && <p className="mb-4 text-sm text-red-500">{error}</p>} {/* Inline error message */}
+
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
@@ -77,17 +92,20 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full py-3 font-semibold text-white transition duration-200 bg-blue-500 rounded-lg hover:bg-blue-600"
+            disabled={loading}
+            className={`w-full py-3 font-semibold text-white rounded-lg transition duration-200 ${
+              loading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+            }`}
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
         <p className="mt-4 text-sm text-center text-gray-600">
           Don't have an account?{' '}
-          <Link to="/register" className="text-blue-500 hover:underline">
+          <a href="/register" className="text-blue-500 hover:underline">
             Sign Up
-          </Link>
+          </a>
         </p>
       </div>
     </div>

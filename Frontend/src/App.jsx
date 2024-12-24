@@ -1,67 +1,64 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';  // Ensure Navbar is in the components folder
-import Home from './pages/Home';  // Home page
-import Login from './pages/Login'; // Login page
-import PropertyDetails from './pages/PropertyDetails';  // PropertyDetails page
-import Properties from './pages/Properties';  // Properties page
-import Agents from './pages/Agents';  // Agents page
-import MapComponent from './components/MapComponent'; // Map component
-import Register from './pages/Register'; // Register page
-import Location from './components/Location'; // Location component
-import ContactForm from './components/ContactForm'; // ContactForm component
-import AboutUs from './pages/AboutUs';  // AboutUs page
-import AdminDashboard from './components/AdminDashboard'; // Admin Dashboard component
-import PropertyList from './components/PropertyList'; // PropertyList component
-import AgentList from './components/AgentList'; // AgentList component
-import UserActivity from './components/UserActivity'; // UserActivity component
-import Reports from './components/Reports'; // Reports component
-import AgentProfile from './pages/AgentProfile'; // AgentProfile page
-import Footer from './components/Footer'; // Footer component
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import PropertyDetails from './pages/PropertyDetails';
+import Properties from './pages/Properties';
+import Agents from './pages/Agents';
+import MapComponent from './components/MapComponent';
+import Location from './components/Location';
+import ContactForm from './components/ContactForm';
+import AboutUs from './pages/AboutUs';
+import AdminDashboard from './components/AdminDashboard';
+import PropertyList from './components/PropertyList';
+import AgentList from './components/AgentList';
+import UserActivity from './components/UserActivity';
+import Reports from './components/Reports';
+import AgentProfile from './pages/AgentProfile';
+import Footer from './components/Footer';
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to="/login" replace />;
+  };
+
+  const location = useLocation();
+  const hideNavbarRoutes = ['/login', '/register'];
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
+
   return (
     <div className="font-poppins bg-[#f9f9f9]">
-      {/* Navbar Section */}
-      <Navbar />
- 
-      {/* Main Content Section */}
+      {shouldShowNavbar && <Navbar onLogout={() => setIsAuthenticated(false)} />}
+
       <div className="min-h-screen bg-[#f9f9f9] py-10">
         <div className="container px-4 mx-auto">
-          
           <Routes>
-            {/* Main Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/properties" element={<Properties />} />
-            <Route path="/property/:id" element={<PropertyDetails />} />
-            <Route path="/agents" element={<Agents />} />
-            <Route path="/map" element={<MapComponent />} />
-            <Route path="/location" element={<Location />} />
-            <Route path="/contact" element={<ContactForm />} />
-            <Route path="/about" element={<AboutUs />} />
-            
-            
-            {/* Agent Profile Route */}
-            <Route path="/agent/:id" element={<AgentProfile />} />
-            
-            {/* Admin Dashboard Route with Nested Routes */}
-            <Route path="/admin-dashboard" element={<AdminDashboard />}>
-              {/* Nested Routes for Admin Dashboard */}
-              <Route path="property-list" element={<PropertyList />} />
-              <Route path="agent-list" element={<AgentList />} />
-              <Route path="user-activity" element={<UserActivity />} />
-              <Route path="reports" element={<Reports />} />
+            <Route path="/" element={<PrivateRoute element={<Home />} />} />
+            <Route path="/properties" element={<PrivateRoute element={<Properties />} />} />
+            <Route path="/property/:id" element={<PrivateRoute element={<PropertyDetails />} />} />
+            <Route path="/agents" element={<PrivateRoute element={<Agents />} />} />
+            <Route path="/map" element={<PrivateRoute element={<MapComponent />} />} />
+            <Route path="/location" element={<PrivateRoute element={<Location />} />} />
+            <Route path="/contact" element={<PrivateRoute element={<ContactForm />} />} />
+            <Route path="/about" element={<PrivateRoute element={<AboutUs />} />} />
+            <Route path="/agent/:id" element={<PrivateRoute element={<AgentProfile />} />} />
+            <Route path="/admin-dashboard" element={<PrivateRoute element={<AdminDashboard />} />}>
+              <Route path="property-list" element={<PrivateRoute element={<PropertyList />} />} />
+              <Route path="agent-list" element={<PrivateRoute element={<AgentList />} />} />
+              <Route path="user-activity" element={<PrivateRoute element={<UserActivity />} />} />
+              <Route path="reports" element={<PrivateRoute element={<Reports />} />} />
             </Route>
-
-          
           </Routes>
-{/* <div>
-  <Footer />
-</div> */}
         </div>
       </div>
+
+      {shouldShowNavbar && <Footer />}
     </div>
   );
 };
