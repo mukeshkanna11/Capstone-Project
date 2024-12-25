@@ -1,8 +1,20 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaUsers, FaChartLine, FaClipboardList, FaSignOutAlt } from 'react-icons/fa';  // Add icons
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+
+  // Handle logout
+  const handleLogoutClick = () => {
+    // Clear authentication state (if you're using localStorage, context, etc.)
+    // Here, just simulate logout for demo purposes
+    localStorage.removeItem('isAuthenticated'); // Example: Clear authentication flag from localStorage
+
+    // Redirect to login page after logout
+    navigate('/login');
+  };
+
   return (
     <div className="flex min-h-screen">
       {/* Sidebar for navigation */}
@@ -34,10 +46,13 @@ const AdminDashboard = () => {
             </Link>
           </li>
           <li>
-            <Link to="/logout" className="flex items-center p-3 transition-all rounded-md hover:bg-red-600">
+            <button
+              onClick={handleLogoutClick}
+              className="flex items-center w-full p-3 text-left transition-all rounded-md hover:bg-red-600"
+            >
               <FaSignOutAlt className="mr-3 text-xl" />
               Logout
-            </Link>
+            </button>
           </li>
         </ul>
       </div>
