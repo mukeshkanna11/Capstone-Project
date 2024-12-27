@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import LoginOptions from './pages/LoginOptions';
 import Properties from './pages/Properties';
 import PropertyDetails from './pages/PropertyDetails';
 import Agents from './pages/Agents';
@@ -19,7 +20,6 @@ import UserActivity from './components/UserActivity';
 import Reports from './components/Reports';
 import AgentProfile from './pages/AgentProfile';
 
-
 // Authentication Context
 const AuthContext = createContext();
 
@@ -28,7 +28,7 @@ const useAuth = () => useContext(AuthContext);
 // Protected Route Component
 const PrivateRoute = ({ element }) => {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ? element : <Navigate to="/login" replace />;
+  return isAuthenticated ? element : <Navigate to="/login-options" replace />;
 };
 
 const App = () => {
@@ -38,7 +38,7 @@ const App = () => {
   });
 
   const location = useLocation();
-  const hideNavbarRoutes = ['/login', '/register'];
+  const hideNavbarRoutes = ['/login', '/register', '/login-options'];
   const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
 
   const handleLogin = (userData) => {
@@ -56,12 +56,16 @@ const App = () => {
         <div className="min-h-screen bg-[#f9f9f9] py-10">
           <div className="container px-4 mx-auto">
             <Routes>
+              {/* Default Route */}
+              <Route path="/" element={<Navigate to="/login-options" replace />} />
+
               {/* Public Routes */}
+              <Route path="/login-options" element={<LoginOptions />} />
               <Route path="/login" element={<Login onLogin={handleLogin} />} />
               <Route path="/register" element={<Register />} />
 
               {/* Protected Routes */}
-              <Route path="/" element={<PrivateRoute element={<Home />} />} />
+              <Route path="/home" element={<PrivateRoute element={<Home />} />} />
               <Route path="/properties" element={<PrivateRoute element={<Properties />} />} />
               <Route path="/property/:id" element={<PrivateRoute element={<PropertyDetails />} />} />
               <Route path="/agents" element={<PrivateRoute element={<Agents />} />} />
@@ -79,12 +83,11 @@ const App = () => {
                 <Route path="reports" element={<PrivateRoute element={<Reports />} />} />
               </Route>
 
-              {/* 404 Page */}
-              
+              {/* Catch-All Redirect */}
+              <Route path="*" element={<Navigate to="/login-options" replace />} />
             </Routes>
           </div>
         </div>
-        {shouldShowNavbar && <Footer />}
       </div>
     </AuthContext.Provider>
   );

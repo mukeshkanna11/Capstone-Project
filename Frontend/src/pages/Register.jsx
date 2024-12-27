@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FaBuilding, FaHome, FaKey } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -45,23 +44,8 @@ const Register = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-700">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-600 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-48 h-48 bg-blue-400 rounded-full opacity-20 animate-pulse"></div>
-
-      {/* Animated Icons */}
-      <div className="absolute text-blue-300 transition-transform transform top-8 left-8 animate-pulse hover:scale-110">
-        <FaBuilding size={50} className="drop-shadow-md" />
-      </div>
-      <div className="absolute text-blue-300 transition-transform transform top-16 right-12 animate-pulse hover:rotate-12">
-        <FaHome size={40} className="drop-shadow-md" />
-      </div>
-      <div className="absolute text-blue-300 transition-transform transform bottom-16 left-16 animate-spin-fast hover:scale-110">
-        <FaKey size={50} className="drop-shadow-md" />
-      </div>
-
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg bg-opacity-90 backdrop-blur-lg">
+    <div className="flex items-center justify-center min-h-screen ">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg bg-opacity-90">
         <h2 className="mb-6 text-3xl font-bold text-center text-gray-900">
           Welcome to RealEstatePro🏡
         </h2>
@@ -125,6 +109,7 @@ const Register = () => {
             {loading ? 'Registering...' : 'Register'}
           </button>
         </form>
+
         <p className="mt-6 text-sm text-center text-gray-600">
           Already have an account?{' '}
           <a href="/login" className="text-indigo-600 hover:underline">

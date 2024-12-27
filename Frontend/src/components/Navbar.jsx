@@ -26,7 +26,7 @@ const Navbar = ({ onLogout }) => {
         {/* Navigation Links */}
         <div className="hidden space-x-6 md:flex">
           <Link
-            to="/"
+            to="/home"
             className="text-[#f1e1c6] hover:underline hover:text-[#d3d3d3] transition duration-200"
           >
             Home
@@ -74,12 +74,16 @@ const Navbar = ({ onLogout }) => {
           </Link>
 
           {/* Logout button */}
-          <button
-            onClick={handleLogout}
+          
+          <div>
+            
+          <Link
+            to="/loginoptions"
             className="bg-[#d9534f] text-[#f1e1c6] px-6 py-2 rounded-full hover:bg-[#c9302c] hover:text-[#f1e1c6] transition duration-200 text-lg font-semibold"
           >
             Logout
-          </button>
+          </Link>
+          </div>
         </div>
       </div>
 
@@ -87,7 +91,7 @@ const Navbar = ({ onLogout }) => {
       <div className="md:hidden bg-[#0a3d62] px-4 py-3">
         <div className="flex flex-col space-y-2">
           <Link
-            to="/"
+            to="/home"
             className="text-[#f1e1c6] hover:underline hover:text-[#d3d3d3] transition duration-200"
           >
             Home

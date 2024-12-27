@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FaBuilding, FaHome, FaKey } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
@@ -20,16 +19,25 @@ const Login = ({ onLogin }) => {
     setLoading(true);
 
     try {
+      // Sending login request
       const response = await axios.post('https://capstone-project-o9dz.onrender.com/api/users/login', {
         email,
         password,
       });
 
+      // If login successful, save token and user info to sessionStorage
       if (response.status === 200) {
-        sessionStorage.setItem('authToken', response.data.token);
-        onLogin();
+        const userData = response.data; // Assuming response contains user data and token
+        sessionStorage.setItem('authToken', userData.token);
+        onLogin(userData); // Pass user data to the parent component
         alert('Login successful!');
-        navigate('/');
+
+        // Redirect based on user role
+        if (userData.role === 'admin') {
+          navigate('/admin-dashboard'); // Redirect to admin dashboard
+        } else {
+          navigate('/home'); // Redirect to home for regular users
+        }
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -43,24 +51,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div
-      className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-indigo-700"
-    >
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-indigo-600 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-48 h-48 bg-blue-400 rounded-full opacity-20 animate-pulse"></div>
-
-      {/* Animated Icons */}
-      <div className="absolute text-blue-300 transition-transform transform top-8 left-8 animate-pulse hover:scale-110">
-        <FaBuilding size={50} className="drop-shadow-md" />
-      </div>
-      <div className="absolute text-blue-300 transition-transform transform top-16 right-12 animate-pulse hover:rotate-12">
-        <FaHome size={40} className="drop-shadow-md" />
-      </div>
-      <div className="absolute text-blue-300 transition-transform transform bottom-16 left-16 animate-spin-fast hover:scale-110">
-        <FaKey size={50} className="drop-shadow-md" />
-      </div>
-
+    <div className="flex items-center justify-center min-h-screen ">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg bg-opacity-90 backdrop-blur-lg">
         <h2 className="mb-6 text-3xl font-bold text-center text-gray-900">
           Welcome to RealEstatePro🏡
@@ -108,6 +99,7 @@ const Login = ({ onLogin }) => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
         <p className="mt-6 text-sm text-center text-gray-600">
           Don't have an account?{' '}
           <a href="/register" className="text-indigo-600 hover:underline">
